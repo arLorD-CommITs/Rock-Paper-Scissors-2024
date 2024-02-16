@@ -2,11 +2,17 @@
 const buttons = document.querySelectorAll('button');
 const resultContainer = document.querySelector('.round-result-container');
 const paraRoundResult = document.createElement('p');
+const scoreContainer = document.querySelector('.score-container');
+const hTwoScore = document.querySelector('.h2-score');
+let roundResultString = "";
 
 buttons.forEach(function(button) {
     button.addEventListener('click', function(){
        resultContainer.appendChild(paraRoundResult);
        paraRoundResult.textContent = playRound(this.value, getComputerChoice());
+       
+       roundResultString = paraRoundResult.textContent;
+       hTwoScore.textContent = " " + getScore(roundResultString); 
     });
 });
 
@@ -17,7 +23,7 @@ function getComputerChoice (computerSelection){
            "scissors";    
 };
 
-function playRound (playerSelection, computerSelection) {
+function playRound (playerSelection, computerSelection, winner) {
 
     if (playerSelection === computerSelection) {
         return "It's a tie!";
@@ -38,10 +44,21 @@ function playRound (playerSelection, computerSelection) {
     }
 };
 
-function trackScore () {
+function getScore (string) {
+    let playerScore = 0;
+    let computerScore = 0;
 
-    for (let i = 0; i <= 5; i++) {
-        
+    for (let i = 0; i < 5; i++) {
+        string.substring(0, 5) === "You W" ? ++playerScore :
+        string.substring(0, 5) === "You L" ? ++computerScore : playerScore = playerScore;
+    }
+
+    if (playerScore > computerScore) {
+        return `You Win! Congrats! || Player score: ${playerScore} || Computer score: ${computerScore}`;
+    } else if (playerScore == computerScore) {
+        return `It's a tie! || Player score: ${playerScore} || Computer score: ${computerScore}`;
+    } else {
+        return `You Lose! || Player score: ${playerScore} || Computer score: ${computerScore}`;
     }
 }
 

@@ -1,17 +1,23 @@
-/*
-const btnRock = document.querySelector('btn-rock'); 
-const btnPaper = document.querySelector('btn-paper');
-const btnScissors = document.querySelector('btn-scissors');
-*/
+
+const buttons = document.querySelectorAll('button');
+const resultContainer = document.querySelector('.round-result-container');
+const paraRoundResult = document.createElement('p');
+
+buttons.forEach(function(button) {
+    button.addEventListener('click', function(){
+       resultContainer.appendChild(paraRoundResult);
+       paraRoundResult.textContent = playRound(this.value, getComputerChoice());
+    });
+});
 
 function getComputerChoice (computerSelection){
     computerSelection = Math.floor(Math.random() * 3)
     return computerSelection === 0 ? "rock" :
            computerSelection === 1 ? "paper" :
            "scissors";    
-}
+};
 
-let playRound = (playerSelection, computerSelection) => {
+function playRound (playerSelection, computerSelection) {
 
     if (playerSelection === computerSelection) {
         return "It's a tie!";
@@ -31,4 +37,11 @@ let playRound = (playerSelection, computerSelection) => {
         return "Invalid input! No scores added. Please enter either 'Rock', 'Paper', or 'Scissors'.";
     }
 };
+
+function trackScore () {
+
+    for (let i = 0; i <= 5; i++) {
+        
+    }
+}
 

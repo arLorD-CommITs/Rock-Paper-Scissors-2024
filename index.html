@@ -8,13 +8,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Project Rock, Paper, Scissors</h1>
-        <div>
-            <button onclick = "alert(playRound('rock', getComputerChoice()))" class="btn-rock">Rock</button>
-            <button onclick = "alert(playRound('paper', getComputerChoice()))" class="btn-rock"class="btn-paper">Paper</button>
-            <button onclick = "alert(playRound('scissors', getComputerChoice()))" class="btn-scissors">Scissors</button>
-        </div>
+    <h1>Rock, Paper, Scissors</h1>
+    <div class="outer-container">
+        <main class="main-container">
+            <div class="tips-container">
+                <h2>How to play</h2><br>
+                <p>Rock paper scissors is an intransitive hand game, usually played between two people, in which each player simultaneously forms one of three shapes with an outstretched hand.</p><br>
+                <p>This is a digitized version of the game wherein you utilize the available buttons on the right instead of your hand.</p><br>
+                <p>Good luck!</p>
+            </div>
+            <div class="play-area-container">
+                <h2>Play a round!</h2>
+                <p>Click any of the following buttons to start a round.</p>
+                <div>
+                    <button class="btn-rock" value="rock">Rock</button>
+                    <button class="btn-paper" value="paper">Paper</button>
+                    <button class="btn-scissors" value="scissors">Scissors</button>
+                </div>
+                <div class="round-result-container"></div>
+            </div>
+            <div class="score-container">
+                <h2>Score</h2>
+                <ul>
+                    <li>Player:</li>
+                    <li>Computer:</li>
+                </ul>
+            </div>  
+        </main>
     </div>
 </body>
 </html>

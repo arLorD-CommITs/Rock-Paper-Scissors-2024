@@ -1,3 +1,5 @@
+let playerScore = 0;
+let computerScore = 0;
 
 const buttons = document.querySelectorAll('button');
 const resultContainer = document.querySelector('.round-result-container');
@@ -12,7 +14,7 @@ buttons.forEach(function(button) {
        paraRoundResult.textContent = playRound(this.value, getComputerChoice());
        
        roundResultString = paraRoundResult.textContent;
-       hTwoScore.textContent = " " + getScore(roundResultString); 
+       alert(getScore(roundResultString));
     });
 });
 
@@ -45,20 +47,40 @@ function playRound (playerSelection, computerSelection, winner) {
 };
 
 function getScore (string) {
-    let playerScore = 0;
-    let computerScore = 0;
+   
 
-    for (let i = 0; i < 5; i++) {
-        string.substring(0, 5) === "You W" ? ++playerScore :
-        string.substring(0, 5) === "You L" ? ++computerScore : playerScore = playerScore;
-    }
-
-    if (playerScore > computerScore) {
-        return `You Win! Congrats! || Player score: ${playerScore} || Computer score: ${computerScore}`;
-    } else if (playerScore == computerScore) {
-        return `It's a tie! || Player score: ${playerScore} || Computer score: ${computerScore}`;
+    if (playerScore < 5 && computerScore < 5) {
+        switch (string.substring(0, 5)) {
+            case "You W":
+                ++playerScore
+                return('Add Player score' + ` ${playerScore} ${computerScore} `);
+            case "You L":
+                ++computerScore
+                return('Add Computer score'  + ` ${playerScore} ${computerScore} `);
+            default:
+                playerScore += 0;
+                computerScore += 0;
+                return('No score changes'  + ` ${playerScore} ${computerScore} `);
+        }
+        
     } else {
-        return `You Lose! || Player score: ${playerScore} || Computer score: ${computerScore}`;
+        let finalPlayerScore = playerScore;
+        let finalComputerScore = computerScore;
+
+        playerScore = 0;
+        computerScore = 0;
+
+
+        if (finalPlayerScore > finalComputerScore) {
+            return `You Won the Game! Congrats! || Player score: ${finalPlayerScore} || Computer score: ${finalComputerScore}`;
+        } else if (finalPlayerScore == finalComputerScore) {
+            return `The Game is tied! || Player score: ${finalPlayerScore} || Computer score: ${finalComputerScore}`;
+        } else {
+            return `Aww, you Lost the game! || Player score: ${finalPlayerScore} || Computer score: ${finalComputerScore}`;
+        }
     }
+     
+
+   
 }
 

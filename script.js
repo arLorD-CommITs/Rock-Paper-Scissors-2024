@@ -15,9 +15,18 @@ buttons.forEach(function(button) {
     button.addEventListener('click', function(){
        resultContainer.appendChild(paraRoundResult);
        paraRoundResult.textContent = playRound(this.value, getComputerChoice());
-       
+
        roundResultString = paraRoundResult.textContent;
-       getScore(roundResultString)
+       getScore(roundResultString);
+
+       if (playerScore === 5) {
+         let playerWon = confirm('You just reached a score of 5 and won the game! Congrats! Would you like to play again?');
+         playerWon ? resetGame() : window.close();
+       } else if (computerScore === 5) {
+         let computerWon = confirm('Aww, the computer had just reached a score of 5. Try again?');
+         computerWon ? resetGame() : window.close();
+       }
+       
     });
 });
 
@@ -50,43 +59,29 @@ function playRound (playerSelection, computerSelection, winner) {
 };
 
 function getScore (string) {
-   
-
     if (playerScore < 5 && computerScore < 5) {
         switch (string.substring(0, 5)) {
             case "You W":
                 ++playerScore
-                //return('Add Player score' + ` ${playerScore} ${computerScore} `);
-                return scoreList.firstChild.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
-               
+                scoreList.firstChild.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+                break;
             case "You L":
                 ++computerScore
-                //return('Add Computer score'  + ` ${playerScore} ${computerScore} `);
-                return scoreList.firstChild.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+                scoreList.firstChild.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+                break;
             default:
                 playerScore += 0;
                 computerScore += 0;
-                return scoreList.firstChild.textContent = `Player: ${playerScore} Computer: ${computerScore}`;;
-        }
-        
-    } else {
-        let finalPlayerScore = playerScore;
-        let finalComputerScore = computerScore;
-
-        playerScore = 0;
-        computerScore = 0;
-
-        if (finalPlayerScore > finalComputerScore) {
-            return `You Won the Game! Congrats! || Player score: ${finalPlayerScore} || Computer score: ${finalComputerScore}`;
-           
-        } else if (finalPlayerScore == finalComputerScore) {
-            return `The Game is tied! || Player score: ${finalPlayerScore} || Computer score: ${finalComputerScore}`;
-        } else {
-            return `Aww, you Lost the game! || Player score: ${finalPlayerScore} || Computer score: ${finalComputerScore}`;
+                scoreList.firstChild.textContent = `Player: ${playerScore} Computer: ${computerScore}`;
+                break;
         }
     }
-     
+}
 
-   
+function resetGame () {
+    playerScore = 0;
+    computerScore = 0;
+    paraRoundResult.remove();
+    scoreList.firstChild.textContent = "Player: Computer:"
 }
 
